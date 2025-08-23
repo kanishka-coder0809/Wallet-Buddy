@@ -21,7 +21,7 @@ const transactionRoutes = require("./routes/transactions");
 app.use("/api/transactions", transactionRoutes);
 
 // ✅ Serve frontend (React build)
-const buildPath = path.join(__dirname, "build");
+const buildPath = path.join(__dirname, "../client/dist");
 app.use(express.static(buildPath));
 
 // Catch-all → send React index.html
