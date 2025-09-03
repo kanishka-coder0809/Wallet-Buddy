@@ -1,11 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
@@ -20,18 +19,9 @@ app.get("/api/test", (req, res) => {
 const transactionRoutes = require("./routes/transactions");
 app.use("/api/transactions", transactionRoutes);
 
-// ✅ Serve frontend (React build)
-const buildPath = path.join(__dirname, "../client/dist");
-app.use(express.static(buildPath));
-
-// Catch-all → send React index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
-});
-
 // MongoDB connection + start server
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("✅ MongoDB connected");
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

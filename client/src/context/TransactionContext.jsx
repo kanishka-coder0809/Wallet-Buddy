@@ -7,7 +7,7 @@ export const TransactionContext = createContext();
 
 // Backend URL
 // src/context/TransactionContext.js or wherever you set the backend URL
-const BACKEND_URL = "https://expense-tracker-production-916a.up.railway.app/api/transactions";
+const BACKEND_URL = "http://localhost:5000/api/transactions";
 
 
 export const TransactionProvider = ({ children }) => {
